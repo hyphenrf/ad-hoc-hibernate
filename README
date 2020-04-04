@@ -1,0 +1,26 @@
+*** ALL IS FUCKED ***
+
+And so, you are one log message away from punching your screen in.
+Something in the whole stack of power management is leaky and you just want to
+hibernate the damn thing. Maybe you have a laptop with a weak battery and you
+don't want to lose your work. Maybe the power is out and the backup power
+brick for your tower is about to run out of juice. Whatever it is, you want to
+hibernate. And you want to run hibernate it *fast*.
+
+Enter ad-hoc hibernate. A dead-simple C file that interfaces directly with
+sysfs. You compile it and SUID (because SUID doesn't work on scripts), and
+forget about it.. Until you need it.
+
+```
+$ hb
+```
+
+This is all you need to run, and as long as you set up your hibernation
+correctly, it'll do its magic. 
+(it will just save you time and effort writing `echo disk >/sys/power/state`)
+
+Just to be EXTRA clear. This only works if you had at some point working
+hibernation setup (think, swapfile or swap partition). It's an ad-hoc fix
+until you debug and figure out what's wrong with logind or whatever broken
+systemd meme you're using and patch it. It is not meant to be an actual power
+management solution. OK? OK.
