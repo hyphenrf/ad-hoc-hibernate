@@ -1,0 +1,7 @@
+[Unit]
+Description=Simple battery watcher script to hibernate the laptop
+
+[Service]
+Type=simple
+ExecStart=/path/to/bat_watcher.sh
+
