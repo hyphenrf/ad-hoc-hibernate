@@ -6,10 +6,6 @@
  * distributed under the terms of MIT license
  */
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-
 #include "ad-hoc-hibernate.h"
 
 int main()
@@ -31,27 +27,29 @@ int main()
 	}
 
 	/* File doesn't STATETYPE in it? bail */
-	if (strstr(buf, STATETYPE) == NULL) {
+	if (!strstr(buf, STATETYPE)) {
 		err("kernel reported that this system doesn't support suspend to disk.");
-		fclose(state);
 		goto error;
 	}
 
 
 	/* file writable? execute successfully */
-	if (freopen(NULL, "w", state) != NULL) {
+	state = freopen(NULL, "w", state);
+
+	if (state) {
 		puts("Suspending to disk...");
 		fputs(STATETYPE, state);
-		fclose(state);
 	} else {
 		err("can't write to "STATEFILE". Are you privileged?");
 		goto error;
 	}
 
 
+	fclose(state);
 	return EXIT_SUCCESS;
 
 error:
+	if (state) fclose(state);
 	return EXIT_FAILURE;
 }
 
