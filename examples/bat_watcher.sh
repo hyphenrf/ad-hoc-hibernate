@@ -4,7 +4,8 @@
 # Copyleft (C) 2020 hyphenrf
 #
 # Distributed under terms of the MIT license.
-#
+# TODO: these scripts run as root - things like notify-send won't work in user
+# session, not trivially.
 
 hb=/usr/local/bin/hb
 crit=15
