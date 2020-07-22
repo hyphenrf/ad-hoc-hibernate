@@ -6,7 +6,7 @@ CFLAGS= -Wall -Wextra -std=c11 -Os
 CFILE= ad-hoc-hibernate.c
 
 PREFIX= /usr/local
-MODE= 4750
+MODE= 4710
 SETGROUP= wheel
 
 hb: $(CFILE)
