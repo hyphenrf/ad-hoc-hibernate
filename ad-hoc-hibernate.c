@@ -20,27 +20,17 @@ int main()
 
 	if (state) {
 		fgets(buf, 32, state);
-		rewind(state);
+
+		/* File doesn't STATETYPE in it? bail */
+		if (Substr(buf, STATETYPE)) {
+			Err("kernel reported that this system doesn't support the '"STATETYPE"' state");
+			goto error;
+		}
+
+		puts("Suspending with '"STATETYPE"' mode...");
+		fputs(STATETYPE, state); /* psuedo files don't need to rewind or truncate */
 	} else {
-		err(""STATEFILE" does not exist.");
-		goto error;
-	}
-
-	/* File doesn't STATETYPE in it? bail */
-	if (!strstr(buf, STATETYPE)) {
-		err("kernel reported that this system doesn't support suspend to disk.");
-		goto error;
-	}
-
-
-	/* file writable? execute successfully */
-	state = freopen(NULL, "w", state);
-
-	if (state) {
-		puts("Suspending to disk...");
-		fputs(STATETYPE, state);
-	} else {
-		err("can't write to "STATEFILE". Are you privileged?");
+		Errno("can't operate on '"STATEFILE"'");
 		goto error;
 	}
 
@@ -51,9 +41,4 @@ int main()
 error:
 	if (state) fclose(state);
 	return EXIT_FAILURE;
-}
-
-void err(char *str)
-{
-	fprintf(stderr, "\e[31mError: %s \e[0m\n", str);
 }

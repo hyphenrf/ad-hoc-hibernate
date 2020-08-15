@@ -9,6 +9,8 @@
 #define STATEFILE "/sys/power/state"
 #define STATETYPE "disk"
 
-void err(char *str);
+#define Err(str) fprintf(stderr, "Error: %s. \n", (str))
+#define Errno(str) fprintf(stderr, "Error: %s: %s.\n", (str), strerror(errno))
+#define Substr(ss, s) (strstr((ss), (s)) == 0)
 
 #endif
