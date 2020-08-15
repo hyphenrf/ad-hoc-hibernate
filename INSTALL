@@ -7,8 +7,8 @@ rwsr-x---		root		wheel
 and will be located in (PREFIX=/usr/local)/bin
 
 You can, as root, change that later. But if you want to specify another group
-(not wheel) during install, the option to that is called SETGROUP
+(not wheel) during install, the option to that is called GROUP
 ```
-make install SETGROUP=adm
+make install GROUP=adm
 ```
 for example.
