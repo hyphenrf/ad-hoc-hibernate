@@ -13,11 +13,11 @@ int main()
 	FILE *state;
 	char buf[32]; /* There are at most "mem freeze disk standby" entries
 	              ** in /sys/power/state .. Which are in total 24 bytes */
+	errno = 0;
 
 
-	state = fopen(STATEFILE, "r");
+	state = fopen(STATEFILE, "r+");
 
-	/* File exists? read it and rewind */
 	if (state) {
 		fgets(buf, 32, state);
 		rewind(state);
