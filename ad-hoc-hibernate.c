@@ -39,6 +39,6 @@ int main()
 	return EXIT_SUCCESS;
 
 error:
-	if (state) fclose(state);
+	if (state) fclose(state); /* Unlike free, fclose can't handle NULL. It's UB */
 	return EXIT_FAILURE;
 }
