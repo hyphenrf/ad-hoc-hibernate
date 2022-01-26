@@ -1,9 +1,6 @@
 /* vim:set noet sts=0 sw=0 ts=2 tw=80:
  * 
  * adhoc-hibernate.c
- * Copyleft (C) 2020 hyphenrf
- *
- * distributed under the terms of MIT license
  */
 
 #include "ad-hoc-hibernate.h"
